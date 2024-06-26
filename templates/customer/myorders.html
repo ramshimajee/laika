@@ -1,0 +1,50 @@
+{% include 'customer/header.html'%} {% load static %}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-12">
+      <nav class="breadcrumb bg-light mb-30">
+        <a class="breadcrumb-item text-dark" href="#">Home</a>
+        <span class="breadcrumb-item active">My Orders</span>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Detail Start -->
+<div class="container-fluid pb-5">
+  <div class="row px-xl-5">
+    {% for data in order_details %}
+    <div class="clickableDiv col-lg-12 h-auto mb-30" data-id="{{ data.order_detail_id }}">
+      <div class="h-100 bg-light p-30">
+        <div class="row">
+          <div id="product-carousel" class="carousel slide col-lg-4" data-ride="carousel" style="float:left;">
+            <div class="carousel-inner bg-light">
+              <div class="carousel-item active">
+                <img src="/media/{{ data.productimage_1 }}" alt="" width="100" height="100">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8" style="float:right;">
+            <h3>{{ data.productname }}</h3>
+            <div class="d-flex mb-3">
+              <small class="pt-1">Delivery Expected on .. </small>
+            </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+
+<script>
+  document.querySelectorAll('.clickableDiv').forEach(function(element) {
+    element.addEventListener('click', function() {
+      var data_id = this.getAttribute('data-id');
+      var url = "{% url 'ordersviewmore' 0 %}".replace('0', data_id);
+      window.location.href = url;
+    });
+  });
+</script>
+
+  <!-- Shop Detail End --> {% include 'customer/footer.html'%}

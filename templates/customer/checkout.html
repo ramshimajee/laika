@@ -1,0 +1,209 @@
+{% include 'customer/header.html'%}
+
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="{% url 'cusindex' %}">Home</a>
+                    <span class="breadcrumb-item active">Checkout</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Checkout Start -->
+    <form action="{% url 'checkoutaction' %}" method="post" >
+
+    {% csrf_token %}
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Full Name(First and Last name)</label>
+                            <input class="form-control" type="text" name="name" placeholder="name">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text" name="email" placeholder="example@email.com">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" name="mobileno" placeholder="+123 456 789">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address</label>
+                            <input class="form-control" type="text" name="address" placeholder="address">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Area, Street, Village</label>
+                            <input class="form-control" type="text" name="street" placeholder="street">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Landmark</label>
+                            <input class="form-control" type="text" name="landmark" placeholder="landmark">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Pincode</label>
+                            <input class="form-control" type="text" name="pincode" placeholder="123">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Town/City</label>
+                            <input class="form-control" type="text" name="city" placeholder="town/city">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <select name="stateid" class="custom-select">
+                                <option value="">-- Select State --</option>
+                                {% for item in states %}
+                                <option value="{{item.stateid}}">{{item.statename}}</option>
+                                {%endfor%}
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            {% comment %} <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="newaccount">
+                                <label class="custom-control-label" for="newaccount">Create an account</label>
+                            </div> {% endcomment %}
+                        </div>
+                        <div class="col-md-12">
+                            <div class="custom-control custom-checkbox">
+                                {% comment %} <input type="checkbox" class="custom-control-input" id="shipto">
+                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse mb-5" id="shipping-address">
+                    {% comment %} <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Shipping Address</span></h5> {% endcomment %}
+                    <div class="bg-light p-30">
+                        <div class="row">
+                            {% comment %} <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="John">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Doe">
+                            </div> {% endcomment %}
+                            {% comment %} <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" type="text" placeholder="example@email.com">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="text" placeholder="+123 456 789">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Use my location</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <h10 class="text-secondary text-lowercase mt-4 mb-3">May be used to assist delivery</h10>
+                            <div class="col-md-6 form-group">
+                                <label>Address</label>
+                                <input class="form-control" type="text" placeholder="address">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Area, Street, Village</label>
+                                <input class="form-control" type="text" placeholder="street">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Landmark</label>
+                                <input class="form-control" type="text" placeholder="landmark">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Pincode</label>
+                                <input class="form-control" type="text" placeholder="123">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Town/City</label>
+                                <input class="form-control" type="text" placeholder="Town/city">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <select name="stateid" class="custom-select">
+                                    <option value="">-- Select State --</option>
+                                    {% for item in states %}
+                                    <option value="{{item.stateid}}">{{item.statename}}</option>
+                                    {%endfor%}
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                            {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom">
+                       
+                        <h6 class="mb-3">Products</h6>
+                        {%for data in result %}
+                        
+                        
+                        <div class="d-flex justify-content-between">
+                            <p>{{data.8}} / {{data.2}}</p>
+                            <p>- {{data.9}}.00/-</p>
+                        </div>
+                        {%endfor%}
+                     
+                    </div>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Shipping Charge</h6>
+                            <h6>{{shipping_charge}}.00/-</h6>
+                        </div>
+                        <div class="border-bottom pt-3 pb-2">
+                            
+                        <div class="d-flex justify-content-between">
+                            
+                            <h6 class="font-weight-medium">Free delivery ( {{delivery_date}} ) on orders dispatched by LAIKA over 999</h6>
+                          
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Sub Total</h5>
+                            <h5>{{total_sum}}.00 /-</h5>
+                            <input type="hidden" name="total_sum" value="{{total_sum}}">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" value="COD" id="payment">
+                                <label class="custom-control-label" for="payment">Cash on Delivery</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="CARD PAYMENT" name="payment" id="cardpayment">
+                                <label class="custom-control-label" for="cardpayment">Credit/Debit/ATM Card</label>
+                            </div>
+                        </div>
+                       <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Proceed to Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </form>
+    <!-- Checkout End -->
+
+
+    {% include 'customer/footer.html'%}

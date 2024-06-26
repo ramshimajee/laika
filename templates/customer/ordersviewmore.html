@@ -1,0 +1,58 @@
+{% include 'customer/header.html'%} 
+{% load static %}
+<link href="{% static 'css/orderviewmore.css'%}" rel="stylesheet">
+<section class="vh-70 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      {% for data in result %}
+      <div class="col-md-10 col-lg-8 col-xl-6">
+        <div class="card card-stepper" style="border-radius: 16px;">
+          <div class="card-header p-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">{{data.order_detail_id}}</span></p>
+                <p class="text-muted mb-0"> Place On <span class="fw-bold text-body">{{data.order_date}}</span> </p>
+              </div>
+              <div>
+                {% comment %} <h6 class="mb-0"> <a href="#">View Details</a> </h6> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex flex-row mb-4 pb-2">
+              <div class="flex-fill">
+                <h5 class="bold">{{data.productname}}</h5>
+                <p class="text-muted"> Qt: {{data.quantity}} item</p>
+                <h4 class="mb-3"> $ {{data.product_rate}} <span class="small text-muted"> via (COD) </span></h4>
+                
+              </div>
+              <div>
+                <img class="align-self-center img-fluid"
+                  src="/media/{{data.productimage_1}}" width="250" style="height:200px;">
+              </div>
+            </div>
+            <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-3">
+              <li class="step0 active" id="step1"><span style="padding:10px;">Order Confirmed</span></li>
+              <li class="step0 active text-center" id="step2"><span style="padding:10px;">Shipped</span></li>
+              <li class="step0 active text-center" id="step3"><span style="margin-right: -12ex;padding:10px;">Out For Delivery</span></li>
+              <li class="step0 active text-center" id="step4"><span style="margin-right: -19ex;padding:10px;">Delivery</span></li>
+          </ul>
+            
+          </div>
+          <div class="card-footer p-6">
+            <div class="d-flex justify-content-between">
+              <h5 class="fw-normal mb-0"><a href="#!">Cancel</a></h5>
+              <div class="border-start h-100"></div>
+              <h5 class="fw-normal mb-0"><a href="#!">Chat with us</a></h5>
+              <div class="border-start h-100"></div>
+          
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+</section>
+{% include 'customer/footer.html'%}

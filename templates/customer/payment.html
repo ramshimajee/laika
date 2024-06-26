@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: white;
+  
+      padding: 30px 10px;
+  }
+  
+  .card {
+      max-width: 500px;
+      margin: auto;
+      color: black;
+      border-radius: 20 px;
+  }
+  
+  p {
+      margin: 0px;
+  }
+  
+  .container .h8 {
+      font-size: 30px;
+      font-weight: 800;
+      text-align: center;
+  }
+  
+  .btn.btn-primary {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+      border: none;
+      transition: 0.5s;
+      background-size: 200% auto;
+  
+  }
+  
+  
+  .btn.btn.btn-primary:hover {
+      background-position: right center;
+      color: #fff;
+      text-decoration: none;
+  }
+  
+  
+  
+  .btn.btn-primary:hover .fas.fa-arrow-right {
+      transform: translate(15px);
+      transition: transform 0.2s ease-in;
+  }
+  
+  .form-control {
+      color: white;
+      background-color: #f7f9fa;
+      border: 2px solid transparent;
+      height: 60px;
+      padding-left: 20px;
+      vertical-align: middle;
+  }
+  
+  .form-control:focus {
+      color: white;
+      background-color: skyblue;
+      border: 2px solid #2d4dda;
+      box-shadow: none;
+  }
+  
+  .text {
+      font-size: 14px;
+      font-weight: 600;
+  }
+  
+  ::placeholder {
+      font-size: 14px;
+      font-weight: 600;
+  }
+</style>
+
+</head>
+<body>
+  
+
+    
+<div class="container p-0">
+  <div class="card px-4">
+      <p class="h8 py-3">Payment Details</p><br><br>
+      <div class="row gx-3">
+        <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
+        <form action="{% url 'paymentaction' %}" method="post" >
+          
+           {% csrf_token %} 
+
+          <div class='form-row'>
+            <div class='col-xs-12 form-group required'>
+              <label class='control-label'>Name on Card</label>
+              <input class='form-control' size='4' type='text' placeholder='Card Name'>
+            </div>
+          </div>
+          <div class='form-row'>
+            <div class='col-xs-12 form-group card required'>
+              <label class='control-label'>Card Number</label>
+              <input autocomplete='off' class='form-control card-number' name='cardno' size='20' type='text' placeholder='Card Number'>
+            </div>
+          </div>
+          <div class='form-row'>
+            <div class='col-xs-4 form-group cvc required'>
+              <label class='control-label'>CVC</label>
+              <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text'>
+            </div>
+            <div class='col-xs-4 form-group expiration required'>
+              <label class='control-label'>Expiration</label>
+              <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+            </div>
+            <div class='col-xs-4 form-group expiration required'>
+              <label class='control-label'> </label>
+              <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text'>
+            </div>
+          </div>
+          <div class='form-row'>
+            <div class='col-md-12'>
+              <div class='form-control total btn btn-info' style="background-color:green;font-size:large">
+                Total:
+                <span class='amount'>{{subtotal}}.00 /-</span>
+                
+                <input type="hidden" name="payments" value="{{payments}}">
+                <input type="hidden" name="total_amount" value="{{subtotal}}">
+              
+              </div>
+            </div>
+          </div><br>
+          <div class='form-row'>
+            <div class='col-md-12 form-group'>
+              
+    
+              <button class='form-control btn btn-primary submit-button' type='submit'>Pay »</button>
+            </div>
+          </div>
+          <div class='form-row'>
+            <div class='col-md-12 error form-group hide'>
+              <div class='alert-danger alert'>
+                Please correct the errors and try again.
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+</body>
+</html>

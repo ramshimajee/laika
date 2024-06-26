@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  {% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <link rel="stylesheet" href="{% static 'css/styles.min.css'%}"/>
+</head>
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="" width="180" alt="">
+                </a>
+                <p class="text-center">Registration</p>
+
+                <form action="{% url 'cusregformaction' %}" method="post">
+
+                  {% csrf_token %}
+
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label"> Customer Name</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputtext1" aria-describedby="name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email Id</label>
+                    <input type="email" name="emailid" class="form-control" id="exampleInputEmail1" aria-describedby="emailid">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputnumber" class="form-label">Contact No</label>
+                    <input type="number" name="number" class="form-control" id="exampleInputnumber" aria-describedby="number">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="examplestate" class="form-label">Choose State</label>
+                      <select name="stateid" class="form-control">
+                          <option value="">-- Select State --</option>
+                          {% for item in states %}
+                          <option value="{{item.stateid}}">{{item.statename}}</option>
+                          {%endfor%}
+                      </select>
+                      <div class="select-dropdown"></div>
+                  </div>
+
+                   
+                  <div class="mb-3">
+                    <label for="exampleInputdistrict" class="form-label">Choose District</label>
+                      <select name="districtid" class="form-control">
+                          <option value="">-- Select District --</option>
+                          {% for item in district %}
+                          <option value = "{{item.districtid}}">{{item.districtname}}</option>
+                          {%endfor%}
+                      </select>
+                      <div class="select-dropdown"></div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputlocation" class="form-label">Enter Location</label>
+                    <input type="text" name="location" class="form-control" id="location" aria-describedby="location">
+                    
+                  </div>
+                        <div class="select-dropdown"></div>
+                        <div class="mb-3">
+                          <label for="exampleInputaddress" class="form-label">Address </label>
+                          <input type="text" name="address" class="form-control" id="address" aria-describedby="address">
+                          
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputusername" class="form-label">Username</label>
+                          <input type="text" name="username" class="form-control" id="username" aria-describedby="username">
+                          
+                        </div>
+                        
+                      <div class="mb-3">
+                        <label for="exampleInputpassword" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputpassword">
+                      </div>
+
+                  
+                  {% comment %} <a href="" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" onclick="myFunction()">Sign Up</a> {% endcomment %}
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Submit</button>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
+                    <a class="text-primary fw-bold ms-2" href="login.html">Sign In</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+<script>
+  function myFunction() {
+    alert("Registration successfull");
+  }
+  </script>

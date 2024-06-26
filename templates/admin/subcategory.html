@@ -1,0 +1,54 @@
+{% include 'admin/header.html'%}
+
+<div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">SUB CATEGORY</h5>
+              <div class="card">
+                <div class="card-body">
+
+                  <form action= "{% url 'subcategoryaction' %}" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                      <label for="examplestate" class="form-label">Choose category</label>
+                        <select name="categoryid" class="form-control">
+                            <option value="">-- Select category --</option>
+                            {% for item in category %}
+                            <option value="{{item.categoryid}}">{{item.category_name}}</option>
+                            {%endfor%}
+                        </select>
+                        <div class="select-dropdown"></div>
+                    </div>
+                      
+                    
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Subcategory Name</label>
+                      <input type="text" name="subcategoryname" class="form-control" id="exampleInputname">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">File</label>
+                      <input type="file" name="file" class="form-control" id="exampleInputfile">
+                    </div>
+
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          function myFunction() {
+            alert("Registration successfull");
+          }
+          </script>
+
+        {% include 'admin/footer.html'%}

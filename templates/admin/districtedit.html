@@ -1,0 +1,48 @@
+{% include 'admin/header.html'%}
+
+<div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">EDIT DISTRICT</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form action= "{% url 'districtedit' id=edit.districtid %}" method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                      <label for="examplestate" class="form-label">Choose State</label>
+                        <select name="stateid" class="form-control" value="{{edit.state}}">
+                            <option value="">-- Select State --</option>
+                            {% for item in states %}
+                            <option value="{{item.stateid}}" {% if item.stateid == edit.state %} selected {% endif %}>{{item.statename}}</option>
+                            {%endfor%}
+                        </select>
+                        <div class="select-dropdown"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputdistrict" class="form-label">Enter District</label>
+                        <input type="text" name="district" class="form-control" id="district" aria-describedby="district" value="{{edit.districtname}}" >
+                        
+                      </div>
+                            <div class="select-dropdown"></div>
+                        
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          function myFunction() {
+            alert("Updated successfully");
+          }
+          </script>
+        {% include 'admin/footer.html'%}

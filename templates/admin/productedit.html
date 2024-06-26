@@ -1,0 +1,93 @@
+{% include 'admin/header.html'%}
+
+<div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">PRODUCTS</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form action= "{% url 'productedit' id=edit.productid %}" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                      <label for="exampleInputname" class="form-label">Enter Productname </label>
+                      <input type="text" name="name" class="form-control" id="name" aria-describedby="name" value="{{edit.productname}}">
+                      
+                    </div>
+                    <div class="mb-3">
+                        <label for="examplecategory" class="form-label">Choose Category</label>
+                          <select name="categoryid" class="form-control">
+                              <option value="">-- Choose Category --</option>
+                              {% for item in category %}
+                              <option value="{{item.categoryid}}"{% if item.categoryid == edit.category_id %} selected {% endif %}> {{item.category_name}}</option>
+                              {%endfor%}
+                          </select>
+                          <div class="select-dropdown"></div>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="examplesubcategory" class="form-label">Choose subcategory</label>
+                          <select name="subcategoryid" class="form-control">
+                              <option value="">-- Choose subcategory --</option>
+                              {% for item in subcategory %}
+                              <option value="{{item.sub_categoryid}}"{% if item.subcategoryid == edit.sub_categoryid %} selected {% endif %}>{{item.subcategory_name}}</option>
+                              {%endfor%}
+                          </select>
+                          <div class="select-dropdown"></div>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="exampleInputrate" class="form-label">Product rate </label>
+                        <input type="number" name="rate" class="form-control" id="rate" aria-describedby="rate" value="{{edit.product_rate}}">
+                        
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputquantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" class="form-control" id="quantity" aria-describedby="quantity" value="{{edit.quantity}}">
+                        
+                      </div>
+                      
+                    <div class="mb-3">
+                      <label for="exampleInputfile" class="form-label">File</label>
+                      <img src="{{edit.productimage_1.url}}" alt="product image" height="100" width="100">
+                      <input type="file" name="file1" class="form-control" id="exampleInputfile" value="{{edit.productimage_1}}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputfile" class="form-label">File</label>
+                        <img src="{{edit.productimage_2.url}}" alt="product image" height="100" width="100">
+                        <input type="file" name="file2" class="form-control" id="exampleInputfile" value="{{edit.productimage_2}}">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="exampleInputfile" class="form-label">File</label>
+                        <img src="{{edit.productimage_3.url}}" alt="product image" height="100" width="100">
+                        <input type="file" name="file3" class="form-control" id="exampleInputfile"value="{{edit.productimage_3}}">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="exampleInputdescription" class="form-label">Description</label>
+                        <textarea type= "text" name= "description" class="form-control" id="description" value="">{{edit.description}}</textarea>
+                      </div>
+
+                   
+
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          function myFunction() {
+            alert("Updated successfully");
+          }
+          </script>
+        {% include 'admin/footer.html'%}

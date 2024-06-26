@@ -1,0 +1,63 @@
+{% include 'admin/header.html'%}
+
+
+<div class="container-fluid">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">EDIT LOCATION</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form action= "{% url 'locationedit' id=edit.locationid %}" method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                      <label for="examplestate" class="form-label">Choose State</label>
+                        <select name="stateid" class="form-control">
+                            <option value="">-- Select State --</option>
+                            {% for item in states %}
+                            <option value="{{item.stateid}}" {% if item.stateid == edit.state %} selected {% endif %}>{{item.statename}}</option>
+                            {%endfor%}
+                        </select>
+                        <div class="select-dropdown"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputdistrict" class="form-label">Choose District</label>
+                          <select name="districtid" class="form-control">
+                              <option value="">-- Select District --</option>
+                              {% for item in district %}
+                              <option value = "{{item.districtid}}"{% if item.districtid == edit.district %} selected {% endif %}>{{item.districtname}}</option>
+                              {%endfor%}
+                          </select>
+                          <div class="select-dropdown"></div>
+                      </div>
+
+
+                    
+                    <div class="mb-3">
+                        <label for="exampleInputdistrict" class="form-label">Enter Location</label>
+                        <input type="text" name="location" class="form-control" id="location" aria-describedby="location" value="{{edit.locationname}}" >
+                        
+                      </div>
+                            <div class="select-dropdown"></div>
+                        
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" onclick="myFunction()" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+            function myFunction() {
+              alert("Updated successfull");
+            }
+            </script>
+        {% include 'admin/footer.html'%}

@@ -1,0 +1,103 @@
+{% include 'admin/header.html'%}
+<br><br><br><br>
+  <!-- Date field and search button -->
+  <form action="{% url 'getmonthlyreport' %}" method="post">
+    {% csrf_token %}
+   <div class="row mb-4">
+    <div class="col-auto">
+      <input type="date" name="FromDate" id="FromDate" class="form-control" placeholder="Select date">
+    </div>
+    <div class="col-auto">
+        <input type="date" name="ToDate" id="ToDate" class="form-control" placeholder="Select date">
+      </div>
+    <div class="col-auto">
+      <button type="text" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+</form>
+
+
+        
+
+        <div class="table-responsive">
+          <table class="table text-nowrap mb-0 align-middle">
+            <thead class="text-dark fs-4">
+              <tr>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">slno</h6>
+                </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Category</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Sub Category</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Product</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Unit Price</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Quantity</h6>
+                  </th>
+                  <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0">Sale Price</h6>
+                  </th>  
+              </tr>
+            </thead>
+            {% for data in order_detail %}
+            <tbody>
+              <tr>
+                
+                <td class="border-bottom-0">
+                    {{forloop.counter}}
+                    <h6 class="fw-semibold mb-1"></h6>                              
+                </td>
+                <td class="border-bottom-0">
+                  {{data.category_name}}
+                <p class="mb-0 fw-normal"></p>
+              </td> 
+              <td class="border-bottom-0">
+                {{data.subcategory_name}}
+              <p class="mb-0 fw-normal"></p>
+            </td> 
+
+                <td class="border-bottom-0">
+                    {{data.productname}}
+                  <p class="mb-0 fw-normal"></p>
+                </td>    
+
+                <td class="border-bottom-0">
+                    {{data.product_rate}}
+                  <p class="mb-0 fw-normal"></p>
+                </td> 
+
+                <td class="border-bottom-0">
+                    {{data.quantity}}
+                  <p class="mb-0 fw-normal"></p>
+                </td> 
+                <td class="border-bottom-0">
+                  {{data.product_price}}
+                <p class="mb-0 fw-normal"></p>
+              </td> 
+                
+              </tr> 
+
+               {%endfor%}                     
+            </tbody>
+          
+          </table>
+
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function myFunction() {
+      alert("Deleted successfully");
+    }
+    </script>
+ 
+  {% include 'admin/footer.html'%}

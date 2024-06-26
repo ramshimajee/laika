@@ -1,0 +1,113 @@
+{% include 'admin/header.html'%}
+<br><br><br><br>
+<div class="col-lg-8 d-flex align-items-stretch">
+    <div class="card w-100">
+      <div class="card-body p-4">
+        <h5 class="card-title fw-semibold mb-4">GET ORDERDETAIL</h5>
+
+        <div class="table-responsive">
+          <table class="table text-nowrap mb-0 align-middle">
+            <thead class="text-dark fs-4">
+              <tr>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Slno</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Product Image</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Product Name</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Quantity</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Order Status</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Total Amount </h6>
+                </th>
+               
+                
+            </thead>
+            {% for data in order_detailsview %}
+            <tbody>
+              <tr>
+                
+                <td class="border-bottom-0">
+                    {{forloop.counter}}
+                    <h6 class="fw-semibold mb-1"></h6>                              
+                </td>
+                
+                <td class="border-bottom-0">
+                  
+                  <img src="{{data.productimage_1.url}}" alt="product image" height="100" width="100">
+                  <p class="mb-0 fw-normal"></p>
+                </td> 
+                <td class="border-bottom-0">
+                    {{data.productname}}
+                  <p class="mb-0 fw-normal"></p>
+                </td>  
+                <td class="border-bottom-0">
+                  {{data.quantity}}
+                <p class="mb-0 fw-normal"></p>
+              </td> 
+              <td class="border-bottom-0">
+                {{data.order_status}}
+              <p class="mb-0 fw-normal"></p>
+            </td> 
+              <td class="border-bottom-0">
+                {{data.product_price}}.00 /-
+              <p class="mb-0 fw-normal"></p>
+            </td> 
+
+                
+              
+                {% comment %} <td>
+              <a href=""><button class="btn btn-primary">Viewmore</button></a>
+           </td> {% endcomment %}
+               
+                </td>
+              </tr>                         
+            </tbody>
+            {% endfor %}
+            <tr>
+              <td colspan="5" class="border-bottom-0 text-end">
+                <h6 class="fw-semibold mb-0">Grand Total</h6>
+              </td>
+              <td class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">{{sub_total}}.00 /-</h6>
+              </td>
+            </tr>
+            <tr>
+              {% if order_status == "Shipped" %}
+                <td colspan="6" class="text-end">
+                  <a href="{% url 'addtodelivered' id=master_id %}">
+                    <button class="btn btn-success">Delivered</button>
+                  </a>
+                </td>
+              {% elif order_status != "Delivered" %}
+                <td colspan="6" class="text-end">
+                  <a href="{% url 'addtoshipping' id=master_id %}">
+                    <button class="btn btn-primary" onclick="addToShipping()">Add to Shipping</button>
+                  </a>
+                </td>
+              {% endif %}
+            </tr>
+            
+           
+           
+          </table>
+          
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function myFunction() {
+      alert("Deleted successfully");
+    }
+    </script>
+  {% include 'admin/footer.html'%}
